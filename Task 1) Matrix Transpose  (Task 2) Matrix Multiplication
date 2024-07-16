@@ -1,0 +1,157 @@
+Task 1:
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	// Declaring array1 and also giving thier values
+	int r1,c1;
+	
+	cout<<"Enter Number of array1 row"<<endl;
+	cin>>r1;
+	
+	cout<<"Enter Number of array1 colum"<<endl;
+	cin>>c1;
+	
+	
+	
+	int arr1[r1][c1];
+	
+	
+	for (int i=0;i<r1;i++)
+	{
+		for (int j=0;j<c1;j++)
+		{
+			cout<<"Enter value of array1 index["<<i<<"]"<<"["<<j<<"]"<<endl;
+			cin>>arr1[i][j];
+		}
+		cout<<endl;
+	}
+	
+	
+	int arr2[c1][r1];
+	for (int i=0;i<c1;i++)
+	{
+		for (int j=0;j<r1;j++)
+		{
+			arr2[i][j]=arr1[j][i];
+		}
+		cout<<endl;
+	}
+	
+	for (int i=0;i<r1;i++)
+	{
+		for (int j=0;j<c1;j++)
+		{
+			cout<<arr1[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Array After Transpoe"<<endl;
+	
+	for (int i=0;i<c1;i++)
+	{
+		for (int j=0;j<r1;j++)
+		{
+			cout<<arr2[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	
+	
+	
+	
+	
+	
+}
+
+
+
+Task 2:
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	// Declaring array1 and also giving thier values
+	int r1,c1,r2,c2;
+	
+	cout<<"Enter Number of array1 row"<<endl;
+	cin>>r1;
+	
+	cout<<"Enter Number of array1 colum"<<endl;
+	cin>>c1;
+	
+	cout<<"Enter Number of array2 row"<<endl;
+	cin>>r2;
+	
+	cout<<"Enter Number of array2 colum"<<endl;
+	cin>>c2;
+	
+	bool val=false;
+	if (c1==r2)
+	{
+		val=true;
+	}
+	
+	if (val){
+	
+	int arr1[r1][c1];
+	for (int i=0;i<r1;i++)
+	{
+		for (int j=0;j<c1;j++)
+		{
+			cout<<"Enter value of array1 index["<<i<<"]"<<"["<<j<<"]"<<endl;
+			cin>>arr1[i][j];
+		}
+		cout<<endl;
+	}
+	
+	// Decalring arr2 and also giving thier values
+
+	int arr2[r2][c2];
+	for (int i=0;i<r1;i++)
+	{
+		for (int j=0;j<c1;j++)
+		{
+			cout<<"Enter value of array2 index["<<i<<"]"<<"["<<j<<"]"<<endl;
+			cin>>arr2[i][j];
+		}
+		cout<<endl;
+	}
+	
+	
+	
+	
+		cout<<"Multiplication is possible"<<endl;
+		
+		int arr3[r1][c2];
+		for (int i=0;i<r1;i++)
+		{	
+			for (int j=0;j<c2;j++)
+			{
+				int sum=0;
+				for (int k=0;k<c2;k++)
+				{
+					sum+=(arr1[i][j]*arr2[k][j]);
+				}
+				arr3[i][j]=sum;
+			}
+		}
+		
+		
+		for (int i=0;i<r1;i++)
+		{	
+			for (int j=0;j<c2;j++)
+			{
+				cout<<arr3[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+	}
+	else {
+		cout<<"Multiplication is not possible"<<endl;
+	}
+}
