@@ -4,6 +4,6 @@
 
 <h2>Contents</h2>
 <h3>FizzBuzz.cpp:</h3> <h4>A classic FizzBuzz implementation.</h4><br>
-LinkedList.cpp: A simple linked list data structure.
-SortingAlgorithms.cpp: Various sorting algorithms (bubble sort, quicksort, merge sort).
-Feel free to clone, fork, or collaborate on this repository. Happy coding! 🚀
+<h3>LinkedList.cpp: A simple linked list data structure.</h4><br>
+<h3>SortingAlgorithms.cpp: Various sorting algorithms (bubble sort, quicksort, merge sort).</h4><br>
+<h4>Feel free to clone, fork, or collaborate on this repository. Happy coding! 🚀
