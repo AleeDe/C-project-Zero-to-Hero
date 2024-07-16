@@ -1,0 +1,113 @@
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+int col=0,cond=1;
+char gr[7][7]{32},player1='R',player2='D',currplayer=player1;;
+void start();
+void display(void);
+void input();
+void checkresult();
+void result();
+void restart();
+int main()
+{
+	start();
+	while(cond){
+		
+		display();
+		cout<<"Player's: "<<currplayer<<" ( Select colums 1-7 )"<<endl;
+		cin>>col;
+		if (col>7|| col<0){cout<<"Wrong colum Seleted";continue;}
+		input();
+		
+	}
+}
+
+void display()
+{
+	for (int i=0;i<7;i++)
+	{
+		for (int j=0;j<7;j++)
+		{
+			cout<<"|"<<gr[i][j];
+			if (j==6)
+			{
+				cout<<"|";	
+			}
+		}
+		cout<<endl;
+	}
+}
+void start()
+{
+	for (int i=0;i<7;i++)
+	{
+		for (int j=0;j<7;j++)
+		{
+			gr[i][j]=32;
+		}
+	}
+}
+void input()
+{
+	
+	for (int i=6;i>=0;i--)
+	{
+		if (gr[i][col-1]==32){
+			gr[i][col-1]=currplayer;break;}
+	}
+	checkresult();
+	if (currplayer==player1){currplayer=player2;}
+		else{currplayer=player1;}
+}
+void checkresult(){
+	
+	for (int i=0;i<7;i++)
+	{
+		for (int j=0;j<7;j++)
+		{
+			// Row
+			if (gr[i][j] == currplayer && gr[i][j + 1] == currplayer &&
+          	gr[i][j + 2] == currplayer && gr[i][j + 3] == currplayer){result();break;}
+          	//colume
+          	if (gr[i][j] == currplayer && gr[i+1][j] == currplayer &&
+          	gr[i+2][j] == currplayer && gr[i+3][j] == currplayer){result();break;}
+          	//Left Digonal
+          	if (gr[i][j] == currplayer && gr[i+1][j+1] == currplayer &&
+          	gr[i+2][j+2] == currplayer && gr[i+3][j+3] == currplayer){result();break;}
+          	//Right Digonal
+          	if (gr[i][7 - 1 - i] == currplayer && gr[i+1][7-2- i] == currplayer &&
+          	gr[i+2][7-3- i] == currplayer && gr[i+3][7-4- i] == currplayer){result();break;}
+          	//Left Digonal downward
+          	if (gr[i+1][j+2] == currplayer && gr[i+2][j+3] == currplayer &&
+          	gr[i+3][j+4] == currplayer && gr[i+4][j+5] == currplayer){result();break;}
+          	//Left Digonal downward
+          	if (gr[j+2][i+1] == currplayer && gr[j+3][i+2] == currplayer &&
+          	gr[j+4][i+3] == currplayer && gr[j+5][i+4] == currplayer){result();break;}
+          	if(gr[0][0]!=32 && gr[0][1]!=32 && gr[0][2]!=32 && gr[0][3]!=32 && gr[0][4]!=32 && gr[0][5]!=32&&gr[0][6]!=32){
+          		cout<<"Game Draw"<<endl;exit(1);
+			  }
+		}
+	}
+}
+void result(){
+	int c;
+	display();
+	cout<<"player: "<<currplayer<<" Win"<<endl;
+	cout<<"Do you play again \n1)Yes\t2)No"<<endl;
+	cin>>c;
+	if (c==1)
+	{
+		restart();
+	}
+	else if (c==2){
+		cond=0;
+	}
+	else{
+		exit(1);
+	}
+}
+void restart(){
+	start();
+}
