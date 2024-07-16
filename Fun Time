@@ -1,0 +1,144 @@
+Exercise 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Create a function that takes a vector2D as input and prints its fields. The function should be
+declared as follows:
+void print(const vector2D&amp; v);
+The function should print the vector in the following format:
+(1.2, 3.4)
+where the first number is the value of x field and the second number is the value of y field.
+
+
+#include<iostream>
+using namespace std;
+struct vector2D{
+	double x;
+	double y;
+};
+void print(const vector2D& a)
+{
+	cout<<"("<<a.x<<", "<<a.y<<") "<<endl;
+}
+vector2D add(vector2D& a,vector2D& b)
+{
+	vector2D var{a.x+b.x,a.y+b.y};
+	return var;
+}
+vector2D operator+(vector2D& a,vector2D& b)
+{
+	return add(a,b);
+}
+vector2D operator*(vector2D& a,double b)
+{
+	vector2D var{a.x*b,a.y*b};
+	return var;
+}
+vector2D operator*=(vector2D& a,double b)
+{
+	a.x=a.x*b;
+	a.y=a.y*b;
+	return a;
+}
+double dot(vector2D& a,vector2D& b)
+{
+	return a.x*b.x+a.y*b.y;
+}
+
+int main()
+{
+	vector2D var1{1.2,3.4},var2{5.6,7.8};
+	print(var1);
+	print(var2);
+	
+	vector2D var3=add(var1,var2);
+	print(var3);
+	
+	vector2D var4=var1+var2;
+	print(var4);
+	
+	vector2D var5=var1*2;
+	print(var5);
+	
+	var1*=2;
+	print(var1);
+	
+	double var6=dot(var1,var2);
+	cout<<var6;
+
+
+}
+
+
+Exercise 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Write a function that takes two vector2D as input and returns the sum of the two vectors. The
+function should be declared as follows:
+vector2D add(const vector2D&amp; v1, const vector2D&amp; v2);
+The function should return a new vector whose x field is the sum of the x fields of the two input
+vectors, and y field is the sum of the y fields of the two input vectors.
+
+
+#include<iostream>
+using namespace std;
+struct fra{
+	int num;
+	int denom;
+	
+	friend ostream& operator<<(ostream& os, const fra& a) {
+        os << a.num << "/" << a.denom;
+        return os;
+    }
+};
+
+fra operator+(fra&a,fra&b){
+	fra add;
+	add.num=((b.denom)*(a.num))+((a.denom)*(b.num));
+	add.denom=a.denom*b.denom;
+	return add;
+}
+fra operator+=(fra&a,fra&b){
+	a.num=((b.denom)*(a.num))+((a.denom)*(b.num));
+	a.denom=a.denom*b.denom;
+	return a;
+}
+fra operator*(fra&a,fra&b){
+	fra mul;
+	mul.num=a.num*b.num;
+	mul.denom=a.denom*b.denom;
+	return mul;
+}
+fra operator*=(fra&a,fra&b){
+	a.num=a.num*b.num;
+	a.denom=a.denom*b.denom;
+	return a;
+}
+bool operator==(fra&a,fra&b){
+	if(a.num==b.num&&a.denom==b.denom){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+int main()
+{
+	fra num1{1,2},num2{1,2};
+	cout<<num1<<endl;
+	
+	fra num3=num1+num2;
+	cout<<num3<<endl;
+	
+	fra num4=num1*num2;
+	cout<<num4<<endl;
+	
+	num3+=num2;
+	cout<<num3<<endl;
+
+	num1*=num2;
+	cout<<num1<<endl;
+	
+	if (num1==num2){
+		cout<<"EQUAL"<<endl;
+	}
+	else{
+		cout<<"UNEQUAL"<<endl;
+	}
+}
