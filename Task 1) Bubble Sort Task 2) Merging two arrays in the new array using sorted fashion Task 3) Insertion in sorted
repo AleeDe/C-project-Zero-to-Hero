@@ -1,0 +1,133 @@
+Task 1:
+
+
+#include<iostream>
+using namespace std;
+
+int  main()
+{
+	int len;
+	cout<<"Enter Your array Length"<<endl;
+	cin>>len;
+	int arr[len];
+	for (int i=0;i<len;i++)
+	{
+		cin>>arr[i];
+	}
+	for (int i=0;i<len;i++)
+	{
+		for (int j=0;j< len-i-1;j++)
+	{
+		if (arr[j]>arr[j+1])	
+		{
+			int temp;
+			temp=arr[j];
+			arr[j]=arr[j+1];
+			arr[j+1]=temp;
+		}
+	}
+	}
+	cout<<"Array after sorted"<<endl;
+	for (int i=0;i<len;i++)
+	{
+		cout<<arr[i]<<endl;
+	}
+}
+
+
+
+Task 2:
+
+
+
+#include<iostream>
+using namespace std;
+
+int  main()
+{
+	
+	int arr1[]={1,2,6,4,5};
+	int arr2[]={2,7,8};
+	
+	int len1=5,len2=3;
+	int arr3[len1+len2];
+	int a=0,b=0,k=0;
+
+	while(a<len1 && b<len2)
+	{
+		if (arr1[a]>arr2[b])
+		{
+			arr3[k]=arr2[b];
+			b++;
+		}
+		else
+		{
+			arr3[k]=arr1[a];
+			a++;
+		}
+		k++;
+	}
+	
+	while(a!=len1 || b!=len2)
+	{
+		if (len1>len2)
+		{
+			arr3[k]=arr2[a];
+			a++;
+		}
+		else
+		{
+			arr3[k]=arr1[b];
+			b++;
+		}
+		k++;
+	}
+	cout<<"Array after Sorted"<<endl;
+	for (int i=0;i<(len1+len2);i++)
+	{
+		cout<<arr3[i]<<endl;
+	}
+}
+
+
+Task 3 :
+
+
+
+#include<iostream>
+using namespace std;
+
+int  main()
+{
+	int arr[25],index,i_value,value;
+	cout<<"How many value you input"<<endl;
+	cin>>i_value;
+	cout<<"Enter Your Array"<<endl;
+	for (int i=0;i<i_value;i++)
+	{
+		cin>>arr[i];
+	}
+	cout<<"Inserting value"<<endl;
+	cin>>value;
+	
+	for (int i=0;i<i_value;i++)
+	{
+		if (arr[i]<value) 	index=i+1;
+		
+	}
+
+	int k=i_value-1;
+	int i=i_value;
+	for (;i>index;i--)
+	{
+		arr[i]=arr[k];
+		k--;
+	}
+	arr[index]=value;
+	cout<<"Array after Inserting"<<endl;
+	for (int i=0;i<i_value+1;i++)
+	{
+		cout<<arr[i]<<endl;
+	}
+	
+}
