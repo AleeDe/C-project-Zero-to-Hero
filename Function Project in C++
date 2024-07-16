@@ -1,0 +1,172 @@
+Exercise 1
+Write a function with signature ‘int count7(int n)’ that given a non-negative integer n, returns the count
+of the occurrences of 7 as a digit, so for example count7(717) yields 2. Following are some more
+examples
+• count7(7170123) should return 2
+• count7(7) should return 1
+• count7(123) should returns 0
+
+
+Code:
+
+Task 1
+
+
+#include<iostream>
+using namespace std;
+
+int count(int n)
+{
+	int num=n;
+	int c=0;
+	while (num!=0)
+	{
+		if (rem%10==7)
+		{
+		c++;
+		}
+		num/=10;
+	}
+	return c;
+}
+int main()
+{
+	int num;
+	cout<<"Enter The Number"<<endl;
+	cin>>num;
+	cout<<count(num);
+}
+
+
+Exercise 2
+Write a function isFactor that determines for a pair of integers whether the
+second is a factor of the first. The function should take two integer arguments
+and return true if the second is a factor of the first, false otherwise. Use this
+function in a program that inputs a series of pairs of integers.
+
+Task 2:
+
+
+
+#include<iostream>
+using namespace std;
+
+bool check(int n,int f)
+{
+	int num=n;
+	int fact=f;
+	if (num%fact==0)
+	{
+		return true;
+	}
+
+		return false;
+	
+	
+}
+int main()
+{
+	int num,fact;
+	cout<<"Enter The Number1 and it's Factor"<<endl;
+	cin>>num>>fact;
+	int result=check(num,fact);
+	
+	if (result==1)
+	{
+		cout<<"True";
+	}
+	else{
+	cout<<"Fasle";
+}
+
+}
+
+Exercise 3
+A Dudeney number is a positive integer that is a perfect cube such that the sum
+of its digits is equal to the cube root of the number. There are exactly seven such
+integers. Write a function isDudeney to test if a parameter number is a Dudeney
+number. Use this function in a program that determines and prints the first 3
+Dudeney integers. Then challenge the power of your computer by finding all 7
+Dudeney numbers. Make use of the cube root function, cbrt.
+
+0 , 1 , 512, 4913, 5832, 17576, 19683
+
+
+Task 3:
+
+
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+bool check(int n)
+{
+	int num=n;
+	int cube=cbrt(num);
+	int sum=0;
+	while (num!=0)
+	{
+		int rem=num%10;
+		sum+=rem;
+		num/=10;
+	}
+	if (cube==sum){
+		cout<<"Dudeney Number"<<endl;
+	}
+	else{
+		cout<<"Not Dudeney Number"<<endl;
+	}
+	
+	
+}
+int main()
+{
+	int num;
+	cout<<"Enter The Number"<<endl;
+	cin>>num;
+	check(num);
+
+}
+
+
+
+
+Exercise 4
+Find Frequency of Characters of a String by using function.
+Sample: c++ is excellent
+character check : c
+count : 2
+
+
+
+Task 4:
+
+
+
+#include<iostream>
+using namespace std;
+
+int count(string n)
+{
+	string sen=n;
+	int len=sen.length();
+	int c=0;
+	for (int i=0 ;i<len;i++)
+	{
+		
+		if (sen[i]=='c')
+		{
+		c++;
+		}
+	}
+	return c;
+}
+int main()
+{
+	string sen;
+	cout<<"Enter The Sentence"<<endl;
+	getline(cin,sen);
+	cout<<count(sen);
+}
+
