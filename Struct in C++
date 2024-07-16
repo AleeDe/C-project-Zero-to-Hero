@@ -1,0 +1,277 @@
+Exercise 1:
+
+INPUT → String →Sample input
+&quot;Barca 1 Sevilla 0, Real Madrid 1 Barca 1, Barca 3 Valencia 1, Villarreal 2 Barca 1, Espanyol 2 Barca 4&quot;;
+INPUT → TEAM NAME → Barca
+Write a program to work out how many wins Barca had, how many games they drew, and how many
+Barca lost. &amp; how many games are playing at home.
+Extend the program to work out how many goals Barca scored and how many they conceded.
+Suppose a win gains you 3 points, a draw 1 point, and a loss no points. Have your program work out how
+many points in total Barca have acquired.
+
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct MatchResult {
+    string homeTeam;
+    int homeGoals;
+    string awayTeam;
+    int awayGoals;
+};
+
+vector<MatchResult> parseResults(const string& input) {
+    vector<MatchResult> results;
+    stringstream stream(input);
+    string token;
+
+    while (getline(stream, token, ',')) {
+        stringstream lineStream(token);
+        MatchResult result;
+        lineStream >> result.homeTeam >> result.homeGoals;
+        lineStream >> result.awayTeam >> result.awayGoals;
+        results.push_back(result);
+    }
+
+    return results;
+}
+
+int main() {
+    string input = "Barca 1 Sevilla 0, RealMadrid 1 Barca 1, Barca 3 Valencia 1, Villarreal 2 Barca 1, Espanyol 2 Barca 4";
+    string teamName;
+    cout<<"Enter Team Name that you want to see the result"<<endl;
+    cin>>teamName;
+    int wins = 0, draws = 0, losses = 0, homeGames = 0, goalsScored = 0, goalsConceded = 0, points = 0;
+
+    auto results = parseResults(input);
+    
+    for (const auto& result : results) {
+        if (result.homeTeam == teamName) {
+            homeGames++;
+            goalsScored += result.homeGoals;
+            goalsConceded += result.awayGoals;
+
+            if (result.homeGoals > result.awayGoals) {
+                wins++;
+                points += 3;
+            } else if (result.homeGoals == result.awayGoals) {
+                draws++;
+                points += 1;
+            } else {
+                losses++;
+            }
+        } else if (result.awayTeam == teamName) {
+            goalsScored += result.awayGoals;
+            goalsConceded += result.homeGoals;
+
+            if (result.awayGoals > result.homeGoals) {
+                wins++;
+                points += 3;
+            } else if (result.awayGoals == result.homeGoals) {
+                draws++;
+                points += 1;
+            } else {
+                losses++;
+            }
+        }
+    }
+    
+    cout << "Barca Wins: " << wins <<endl;
+    cout << "Barca Draws: " << draws <<endl;
+    cout << "Barca Losses: " << losses <<endl;
+    cout << "Barca Home Games: " << homeGames << endl;
+    cout << "Goals Scored by Barca: " << goalsScored << endl;
+    cout << "Goals Conceded by Barca: " << goalsConceded <<endl;
+    cout << "Total Points: " << points << endl;
+
+    return 0;
+}
+
+
+
+Exercise 2:
+Write a recursive function removeX() that given a string, compute recursively a new string where all the
+&#39;x&#39; characters have been removed. E.g.,
+● removeX(&quot;xaxb&quot;) returns &quot;ab&quot;
+● removeX(&quot;abc&quot;) returns &quot;abc&quot;
+● removeX(&quot;xx&quot;) returns &quot;&quot;
+
+#include<iostream>
+using namespace std;
+
+string removex(string inp, int len) {
+    if (len < 0) return ""; 
+    if (inp[len] == 'x' || inp[len] == 'X') return removex(inp, len - 1);
+    return removex(inp, len - 1) + inp[len]; // Corrected recursive call
+}
+
+int main() {
+    string inp;
+    cout << "Enter your String" << endl;
+    cin >> inp;
+    string res = removex(inp, inp.length() - 1); 
+    cout << res;
+    return 0;
+}
+
+
+Exercise 3
+Write a function isValid() to check whether a given string is a valid password, i.e., it obeys the following
+rules: • A password must have at least ten characters. • A password consists of only letters and digits. •
+A password must contain at least two digits. • A password must contain at least one letter.
+
+
+#include<iostream>
+#include<cctype>
+using namespace std;
+int b=0,c=0,l{0};
+bool Isvaild(string inp){
+	if (inp.length()<10) {
+	return false;
+	exit(1);
+	}
+	while(inp[b]!='\0'){
+		if (!isalnum(inp[b])){
+			return false;
+			break;
+		} 
+		if (isdigit(inp[b])){
+			c++;
+		}
+		if (islower(inp[b])||isupper(inp[b])){
+			l++;
+		}
+		b++;
+		
+	}
+	if (!(c>1)&&(l>0)) return false;
+}
+int main() {
+    string inp;
+    cout << "Enter your String" << endl;
+    cin >> inp;
+    bool res = Isvaild(inp); // Corrected index
+    if (res){
+    	cout<<"Vaild"<<endl;
+	}
+	else{
+		cout<<"Not Vaild"<<endl;
+	}
+}
+
+
+Exercise 4
+
+Write a Program in C++
+Input �� Paragraph/Lin
+
+Write options for
+
+Find and Replace
+Word Counter
+Sentences
+Articles (a, an ,the)
+Spaces
+
+
+#include<iostream>
+#include<sstream>
+#include<vector>
+using namespace std;
+int wordCounter{0},senCounter{0},artCounter{0},wordcontain{0};
+vector<string> words,sen;
+
+void WordPrint(void){
+  for (const auto& item : words) {
+      cout << item << endl; 
+  }
+}
+void SenPrint(void){
+  for (const auto& item : sen) {
+      cout << item << endl; 
+  }
+}
+void Sen(void){
+  for (const auto& item : words) {
+      sen.push_back(item);
+  }
+}
+
+void Replace(const string& fword,string& rword){
+  for (auto& item : words) {
+      if (item==fword){
+        item = rword;
+      }
+  }
+  WordPrint();
+  
+}
+
+void sentence(stringstream& sso){
+string token;
+while (getline(sso, token, '.')) {
+    sen.push_back(token);
+    senCounter++;
+}
+}
+void breakword(stringstream& sso){
+  string token;
+  while (getline(sso, token, ' ')) {
+      if (!token.empty() && token.back() == '.') {
+          token.pop_back(); // Remove the period from the end
+      }
+    if (token=="a"||token=="an"||token=="the"){
+      artCounter++;
+    }
+    
+      words.push_back(token);
+      wordCounter++;
+  }
+  
+    
+
+
+}
+int main() {
+    int choose;
+    string par;
+    
+    cout << "Enter Your Paragraph" << endl;
+    getline(cin, par);
+    stringstream sso(par),ssi(par);
+    breakword(sso);
+    
+    
+    cout<<"Choose the Option by Pressing Number\n1.Find and Replace Words\n2.WordCounter\n3.Sentence \n4 . Articles Counter\n5. Space \n6. Exits"<<endl;
+    cin>>choose;
+    switch(choose){
+      case 1:
+        {string fword,rword;
+            cout<<"Enter a word to find"<<endl;
+            cin>>fword;
+            cout<<"Enter a word to Replace"<<endl;
+            cin>>rword;
+            Replace(fword,rword);
+            break;}
+      case 2:
+        {cout<<"Number of Word in Paragrah is: "<<wordCounter<<endl;
+            break;}
+      case 3:
+        {   sentence(ssi);
+            SenPrint();
+            cout<<"Number of Sentence in Paragrah is: "<<senCounter<<endl;
+            break;}
+      case 4:
+        {cout<<"Number of Articles in Paragrah is: "<<artCounter<<endl;
+        break;}
+      case 5:
+        {{cout<<"Number of Space in Paragrah is: "<<wordCounter-1<<endl;}
+         case 6:
+          exit(1);
+            
+    }
+    return 0;
+}
+}
